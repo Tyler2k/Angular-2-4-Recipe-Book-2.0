@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+
+import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
-  selector: 'app-shopping-edit',
-  templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css']
+	selector: 'app-shopping-edit',
+	templateUrl: './shopping-edit.component.html',
+	styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit {
 
-  constructor() { }
+	nameInput: string;
+	amountInput: number;
 
-  ngOnInit() {
-  }
+	constructor(private listService: ShoppingListService) { }
+
+	ngOnInit() {
+	}
+
+	onAddItem() {
+		const newIngredient = new Ingredient(this.nameInput, this.amountInput);
+		this.listService.addIngredient(newIngredient);
+	}
 
 }
